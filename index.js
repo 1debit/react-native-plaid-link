@@ -7,7 +7,7 @@ class PlaidAuthenticator extends Component {
 
     return <WebView
       style={{...style}}
-      source={{uri: `https://cdn.plaid.com/link/v2/stable/link.html?key=${publicKey}&apiVersion=v2&env=${env}&product=${product}&clientName=${clientName}&isWebView=true&isMobile=true&webhook=${webhook}&selectAccount=${selectAccount}`}}
+      source={{uri: `https://cdn.plaid.com/link/v2/stable/link.html?key=${publicKey}&env=${env}&product=${product}&clientName=${clientName}&isWebView=true&isMobile=true&webhook=${webhook}&selectAccount=${selectAccount}`}}
       onMessage={(e) => this.onMessage(e)}
     />
   }
@@ -48,8 +48,8 @@ PlaidAuthenticator.defaultProps = {
 }
 
 PlaidAuthenticator.defaultProps = {
-  clientName: 'CatalinMiron',
-  webhook: 'http://batman.codes',
+  clientName: '',
+  webhook: '',
   style: {}
 };
 
