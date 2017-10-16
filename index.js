@@ -1,19 +1,31 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { WebView } from 'react-native';
 
 class PlaidAuthenticator extends Component {
-  render() {
-    const {publicKey, selectAccount, env, product, clientName, webhook, style} = this.props;
+	render() {
+		const {
+			publicKey,
+			selectAccount,
+			env,
+			product,
+			clientName,
+			webhook,
+			style,
+		} = this.props;
 
-    return <WebView
-      style={{...style}}
-      source={{uri: `https://cdn.plaid.com/link/v2/stable/link.html?key=${publicKey}&env=${env}&product=${product}&clientName=${clientName}&isWebView=true&isMobile=true&webhook=${webhook}&selectAccount=${selectAccount}`}}
-      onMessage={(e) => this.onMessage(e)}
-    />
-  }
+		return (
+			<WebView
+				style={{ ...style }}
+				source={{
+					uri: `https://cdn.plaid.com/link/v2/stable/link.html?key=${publicKey}&env=${env}&product=${product}&clientName=${clientName}&isWebView=true&isMobile=true&webhook=${webhook}&selectAccount=${selectAccount}`,
+				}}
+				onMessage={e => this.onMessage(e)}
+			/>
+		);
+	}
 
-  onMessage(e) {
-    /*
+	onMessage(e) {
+		/*
       Response example for success
 
       {
@@ -33,24 +45,8 @@ class PlaidAuthenticator extends Component {
       }
     */
 
-    this.props.onMessage(JSON.parse(e.nativeEvent.data))
-  }
+		this.props.onMessage(JSON.parse(e.nativeEvent.data));
+	}
 }
-
-PlaidAuthenticator.defaultProps = {
-  publicKey: PropTypes.string.isRequired,
-  onMessage: PropTypes.func.isRequired,
-  env: PropTypes.string.isRequired,
-  product: PropTypes.string.isRequired,
-  clientName: PropTypes.string,
-  webhook: PropTypes.string,
-  style: PropTypes.object
-}
-
-PlaidAuthenticator.defaultProps = {
-  clientName: '',
-  webhook: '',
-  style: {}
-};
 
 export default PlaidAuthenticator;
