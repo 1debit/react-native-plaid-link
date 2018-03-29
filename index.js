@@ -11,15 +11,18 @@ class PlaidAuthenticator extends Component {
 			clientName,
 			webhook,
 			style,
+			onMessage,
+			...rest,
 		} = this.props;
 
 		return (
 			<WebView
-				style={{ ...style }}
+				style={style}
 				source={{
 					uri: `https://cdn.plaid.com/link/v2/stable/link.html?key=${publicKey}&env=${env}&product=${product}&clientName=${clientName}&isWebView=true&isMobile=true&webhook=${webhook}&selectAccount=${selectAccount}`,
 				}}
 				onMessage={e => this.onMessage(e)}
+				{...rest}
 			/>
 		);
 	}
